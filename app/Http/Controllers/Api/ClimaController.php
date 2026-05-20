@@ -2,22 +2,45 @@
 
 namespace App\Http\Controllers\Api;
 
+use OpenApi\Attributes as OA;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Clima;
 
 class ClimaController extends Controller
 {
-    // GET /api/climas
+    #[OA\Get(
+        path: "/api/climas",
+        summary: "Exibe todos os climas",
+        tags: ["Climas"],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: "Sucesso"
+            )
+        ]
+    )]
+
     public function index()
     {
+        $climas = Clima::all();
         return response()->json([
-            'mensagem' => 'Lista de climas',
-            'data' => Clima::all()
+            'mensagem' => 'Climas encontrados',
+            'data' => $climas
         ]);
     }
 
-    // GET /api/climas/{id}
+    #[OA\Get(
+        path: "/api/climas/{id}",
+        summary: "Exibe um clima específico",
+        tags: ["Climas"],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: "Sucesso"
+            )
+        ]
+    )]
     public function show(string $id)
     {
         $clima = Clima::find($id);
@@ -32,7 +55,31 @@ class ClimaController extends Controller
         ]);
     }
 
-    // POST /api/climas
+        #[OA\Post(
+        path: "/api/climas",
+        summary: "Cria um novo clima",
+        tags: ["Climas"],
+        requestBody: new OA\RequestBody(
+            required: true,
+            content: new OA\JsonContent(
+                required: ["cidade", "temperatura", "sensacao_termica", "umidade", "clima", "vento"],
+                properties: [
+                    new OA\Property(property: "cidade", type: "string"),
+                    new OA\Property(property: "temperatura", type: "number", format: "float"),
+                    new OA\Property(property: "sensacao_termica", type: "number", format: "float"),
+                    new OA\Property(property: "umidade", type: "integer"),
+                    new OA\Property(property: "clima", type: "string"),
+                    new OA\Property(property: "vento", type: "number", format: "float")
+                ]
+            )
+        ),
+        responses: [
+            new OA\Response(
+                response: 201,
+                description: "Sucesso"
+            )
+        ]
+    )]
     public function store(Request $request)
     {
 
@@ -53,7 +100,31 @@ class ClimaController extends Controller
         ], 201);
     }
 
-    // PUT /api/climas/{id}
+        #[OA\Put(
+        path: "/api/climas/{id}",
+        summary: "Atualiza um clima específico",
+        tags: ["Climas"],
+        requestBody: new OA\RequestBody(
+            required: true,
+            content: new OA\JsonContent(
+                required: ["cidade", "temperatura", "sensacao_termica", "umidade", "clima", "vento"],
+                properties: [
+                    new OA\Property(property: "cidade", type: "string"),
+                    new OA\Property(property: "temperatura", type: "number", format: "float"),
+                    new OA\Property(property: "sensacao_termica", type: "number", format: "float"),
+                    new OA\Property(property: "umidade", type: "integer"),
+                    new OA\Property(property: "clima", type: "string"),
+                    new OA\Property(property: "vento", type: "number", format: "float")
+                ]
+            )
+        ),
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: "Sucesso"
+            )
+        ]
+    )]
     public function update(Request $request, string $id){
         $clima = Clima::find($id);
         if (!$clima) {
@@ -70,7 +141,17 @@ class ClimaController extends Controller
         ]);
     }
 
-    // DELETE /api/climas/{id}
+        #[OA\Delete(
+        path: "/api/climas/{id}",
+        summary: "Deleta um clima específico",
+        tags: ["Climas"],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: "Sucesso"
+            )
+        ]
+    )]
     public function destroy(string $id){
         $clima = Clima::find($id);
         if (!$clima) {

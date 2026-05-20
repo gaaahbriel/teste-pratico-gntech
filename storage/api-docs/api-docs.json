@@ -1,0 +1,162 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Clima API",
+        "description": "API de consulta climática",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/climas": {
+            "get": {
+                "tags": [
+                    "Climas"
+                ],
+                "summary": "Exibe todos os climas",
+                "operationId": "d330d785419ca554acc92dc2cb9e179f",
+                "responses": {
+                    "200": {
+                        "description": "Sucesso"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Climas"
+                ],
+                "summary": "Cria um novo clima",
+                "operationId": "72aaa74409c7a730ac17a040bc133030",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "cidade",
+                                    "temperatura",
+                                    "sensacao_termica",
+                                    "umidade",
+                                    "clima",
+                                    "vento"
+                                ],
+                                "properties": {
+                                    "cidade": {
+                                        "type": "string"
+                                    },
+                                    "temperatura": {
+                                        "type": "number",
+                                        "format": "float"
+                                    },
+                                    "sensacao_termica": {
+                                        "type": "number",
+                                        "format": "float"
+                                    },
+                                    "umidade": {
+                                        "type": "integer"
+                                    },
+                                    "clima": {
+                                        "type": "string"
+                                    },
+                                    "vento": {
+                                        "type": "number",
+                                        "format": "float"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Sucesso"
+                    }
+                }
+            }
+        },
+        "/api/climas/{id}": {
+            "get": {
+                "tags": [
+                    "Climas"
+                ],
+                "summary": "Exibe um clima específico",
+                "operationId": "cade10d485c9b5306bfb506b0b4d793d",
+                "responses": {
+                    "200": {
+                        "description": "Sucesso"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Climas"
+                ],
+                "summary": "Atualiza um clima específico",
+                "operationId": "a488bcf87e7af2d3db00d2a78df745c3",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "cidade",
+                                    "temperatura",
+                                    "sensacao_termica",
+                                    "umidade",
+                                    "clima",
+                                    "vento"
+                                ],
+                                "properties": {
+                                    "cidade": {
+                                        "type": "string"
+                                    },
+                                    "temperatura": {
+                                        "type": "number",
+                                        "format": "float"
+                                    },
+                                    "sensacao_termica": {
+                                        "type": "number",
+                                        "format": "float"
+                                    },
+                                    "umidade": {
+                                        "type": "integer"
+                                    },
+                                    "clima": {
+                                        "type": "string"
+                                    },
+                                    "vento": {
+                                        "type": "number",
+                                        "format": "float"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Sucesso"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Climas"
+                ],
+                "summary": "Deleta um clima específico",
+                "operationId": "14cd42b7c09f440973e31279e0003cef",
+                "responses": {
+                    "200": {
+                        "description": "Sucesso"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Climas",
+            "description": "Climas"
+        }
+    ]
+}
