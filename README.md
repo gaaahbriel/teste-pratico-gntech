@@ -1,63 +1,194 @@
-<<<<<<< HEAD
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Guia de Instalação e Execução — Clima API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+##Sobre o projeto
 
-## About Laravel
+###Este projeto consiste em uma API RESTful desenvolvida com Laravel que:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Consome dados da API pública da OpenWeather
+Armazena os dados climáticos em banco MySQL
+Disponibiliza endpoints RESTful
+Possui documentação Swagger/OpenAPI
+Está totalmente dockerizada com Docker Compose
+Tecnologias utilizadas
+PHP 8.2
+Laravel
+MySQL 8
+Docker
+Docker Compose
+Nginx
+Swagger/OpenAPI
+OpenWeather API
+Pré-requisitos
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Antes de iniciar, instale:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+###1. Docker Desktop
 
-## Learning Laravel
+ Docker Desktop Download
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 2. Git
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Git Download
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+Clonando o projeto
+git clone https://github.com/gaaahbriel/teste-pratico-gntech
 
-## Agentic Development
+Entrar na pasta do projeto
+cd teste-pratico-gntech
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+Configuração do ambiente
+1. Copiar arquivo .env
 
-```bash
-composer require laravel/boost --dev
+### Windows (PowerShell)
+copy .env.example .env
 
-php artisan boost:install
-```
+### Linux/Mac
+cp .env.example .env
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
 
-## Contributing
+## Configurar chave da API OpenWeather
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Abra o arquivo:
 
-## Code of Conduct
+.env
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Adicione sua chave:
 
-## Security Vulnerabilities
+OPENWEATHER_API_KEY=SUA_CHAVE_AQUI
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Como obter a chave da API
 
-## License
+### Criar conta na OpenWeather:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-=======
-# teste-pratico-gntech
-Esta atividade tem como objetivo avaliar suas competências em extração de dados via API, armazenamento em banco de dados, configuração de acesso remoto e uso de Docker para conteinerização
->>>>>>> 79da08f0c496d27b69a4afbd500662b5c4894ed6
+OpenWeather Sign Up
+
+Gerar API Key
+Inserir no .env
+
+## Subindo o ambiente Docker
+
+### Executar build dos containers
+docker compose up -d --build
+
+### Verificar containers
+docker ps
+
+### Os containers esperados:
+
+laravel_app
+laravel_nginx
+laravel_mysql
+
+### Acessar container Laravel
+docker exec -it laravel_app bash
+
+## Instalar dependências
+
+### Dentro do container:
+
+composer install
+
+### Gerar APP_KEY
+php artisan key:generate
+
+### Rodar migrations
+php artisan migrate
+
+### Gerar documentação Swagger
+php artisan l5-swagger:generate
+
+## URLs do projeto
+### API
+http://localhost:8000
+
+### Swagger/OpenAPI
+http://localhost:8000/api/documentation
+
+## Exemplos de endpoints
+
+### Buscar todos os climas
+GET /api/climas
+
+### Exemplo:
+http://localhost:8000/api/climas
+
+### Buscar clima por ID
+GET /api/climas/{id}
+
+### Exemplo:
+http://localhost:8000/api/climas/1
+
+## Banco de dados
+### Credenciais MySQL
+Campo	Valor
+Host	localhost
+Porta	3307
+Database	clima
+Usuário	laravel
+Senha	root
+
+
+## Estrutura Docker
+
+### O projeto utiliza:
+
+## Serviço	Função
+app	Laravel/PHP
+nginx	Servidor web
+mysql	Banco de dados
+
+
+## Comandos úteis
+
+### Derrubar containers
+docker compose down
+
+### Derrubar containers e volumes
+docker compose down -v
+
+### Rebuild completo
+docker compose up -d --build
+
+### Logs dos containers
+docker compose logs -f
+
+### Entrar no MySQL
+docker exec -it laravel_mysql mysql -u laravel -p
+Senha:
+root
+
+## Estrutura do projeto
+app/
+docker/
+routes/
+database/
+config/
+docker-compose.yml
+Documentação Swagger
+
+## A documentação da API foi implementada utilizando:
+L5 Swagger GitHub
+
+## Observações importantes
+
+### Porta MySQL
+O projeto utiliza:
+3306
+
+### Docker Desktop
+Certifique-se de que o Docker Desktop esteja iniciado antes de executar:
+
+docker compose up
+
+### Possíveis problemas
+Docker Engine não iniciado
+Abra o Docker Desktop e aguarde:
+Engine running
+
+## Limpar cache Laravel
+
+### Dentro do container:
+php artisan optimize:clear
+
+### Regenerar Swagger
+php artisan l5-swagger:generate
