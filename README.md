@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
@@ -56,3 +57,7 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+=======
+# teste-pratico-gntech
+Esta atividade tem como objetivo avaliar suas competências em extração de dados via API, armazenamento em banco de dados, configuração de acesso remoto e uso de Docker para conteinerização
+>>>>>>> 79da08f0c496d27b69a4afbd500662b5c4894ed6
